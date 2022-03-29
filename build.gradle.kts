@@ -1,5 +1,6 @@
 plugins {
     kotlin("multiplatform")
+    id("org.jetbrains.compose")
     `node-conventions`
 }
 
@@ -8,6 +9,7 @@ version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
+    maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
 }
 
 kotlin {
@@ -34,12 +36,13 @@ kotlin {
     sourceSets {
         named("jsMain") {
             dependencies {
-                implementation("org.jetbrains.kotlin:kotlin-stdlib-js")
+                implementation(compose.web.core)
+                implementation(compose.runtime)
             }
         }
         named("jsTest") {
             dependencies {
-                implementation("org.jetbrains.kotlin:kotlin-test-js")
+
             }
         }
     }
