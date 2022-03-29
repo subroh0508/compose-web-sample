@@ -1,17 +1,18 @@
 plugins {
-    id 'org.jetbrains.kotlin.js' version '1.6.10'
+    kotlin("js")
+    `node-conventions`
 }
 
-group 'org.example'
-version '1.0-SNAPSHOT'
+group = "net.subroh0508"
+version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-js"
-    testImplementation "org.jetbrains.kotlin:kotlin-test-js"
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-js")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-js")
 }
 
 kotlin {
