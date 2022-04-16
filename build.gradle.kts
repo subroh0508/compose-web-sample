@@ -38,6 +38,7 @@ kotlin {
             dependencies {
                 implementation(compose.web.core)
                 implementation(compose.runtime)
+                implementation(Libraries.decompose)
             }
         }
         named("jsTest") {
