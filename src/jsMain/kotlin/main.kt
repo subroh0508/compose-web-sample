@@ -29,12 +29,12 @@ fun main() {
     renderComposable(rootElementId = AppStyleSheet.ELEMENT_ID) {
         Style(AppStyleSheet)
 
-        App(window.location.pathname) { root ->
+        App(window.location.pathname, window.location.search) { root ->
             Div({ classes(AppStyleSheet.container) }) {
                 Menu(root) { page ->
                     when (page) {
                         is RootComponent.Page.Home -> Home()
-                        is RootComponent.Page.Contents -> Contents()
+                        is RootComponent.Page.Content -> Contents(page)
                         is RootComponent.Page.About -> About()
                     }
                 }

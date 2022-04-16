@@ -23,7 +23,7 @@ fun Menu(
             }
             Li(
                 attrs = {
-                    onClick { root.toContents() }
+                    onClick { root.toContent() }
                 },
             ) {
                 Text("Contents")

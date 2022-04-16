@@ -12,6 +12,7 @@ import com.arkivanov.essenty.lifecycle.resume
 @Composable
 fun App(
     pathname: String,
+    query: String?,
     content: @Composable (RootComponent) -> Unit,
 ) {
     val lifecycle = remember { LifecycleRegistry() }
@@ -19,6 +20,7 @@ fun App(
         RootComponent(
             DefaultComponentContext(lifecycle = lifecycle),
             pathname,
+            query,
             DefaultWebHistoryController(),
         )
     }

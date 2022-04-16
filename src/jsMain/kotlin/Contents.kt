@@ -7,13 +7,33 @@ import org.jetbrains.compose.web.dom.Div
 import org.jetbrains.compose.web.dom.Text
 
 @Composable
-fun Contents() {
+fun Contents(page: RootComponent.Page.Content) {
     Style(ContentsStyle)
 
-    Div({ classes(ContentsStyle.red) }) { Text("RED") }
+    Div({
+        classes(
+            when (page.color) {
+                "red" -> ContentsStyle.red
+                "blue" -> ContentsStyle.blue
+                "green" -> ContentsStyle.green
+                else -> ContentsStyle.common
+            }
+        )
+    }) {
+        Text(
+            buildString {
+                append("Content: ")
+                append(page.color?.uppercase() ?: "DEFAULT")
+            },
+        )
+    }
 }
 
 private object ContentsStyle : StyleSheet() {
+    val common by style {
+        color(Color.black)
+    }
+
     val red by style {
         color(Color.red)
     }
