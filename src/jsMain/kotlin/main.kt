@@ -1,4 +1,6 @@
+import kotlinx.browser.window
 import org.jetbrains.compose.web.css.*
+import org.jetbrains.compose.web.dom.Div
 import org.jetbrains.compose.web.renderComposable
 
 object AppStyleSheet : StyleSheet() {
@@ -16,12 +18,27 @@ object AppStyleSheet : StyleSheet() {
             height(100.percent)
         }
     }
+
+    val container by style {
+        display(DisplayStyle.Flex)
+        height(100.percent)
+    }
 }
 
 fun main() {
     renderComposable(rootElementId = AppStyleSheet.ELEMENT_ID) {
         Style(AppStyleSheet)
 
-        Menu {  }
+        App(window.location.pathname) { root ->
+            Div({ classes(AppStyleSheet.container) }) {
+                Menu(root) { page ->
+                    when (page) {
+                        is RootComponent.Page.Home -> Home()
+                        is RootComponent.Page.Contents -> Contents()
+                        is RootComponent.Page.About -> About()
+                    }
+                }
+            }
+        }
     }
 }

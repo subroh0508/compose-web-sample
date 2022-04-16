@@ -1,9 +1,47 @@
-@file:Suppress("FunctionName")
-
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.*
-import org.w3c.dom.Element
+
+@Composable
+fun Menu(
+    root: RootComponent,
+    content: @Composable (RootComponent.Page) -> Unit,
+) {
+    val routerState by root.routerState.subscribeAsState()
+
+    Style(MenuStyleSheet)
+
+    Div({ classes(MenuStyleSheet.container) }) {
+        Ul({ classes(MenuStyleSheet.list) }) {
+            Li(
+                attrs = {
+                    onClick { root.toHome() }
+                },
+            ) {
+                Text("Home")
+            }
+            Li(
+                attrs = {
+                    onClick { root.toContents() }
+                },
+            ) {
+                Text("Contents")
+            }
+            Li(
+                attrs = {
+                    onClick { root.toAbout() }
+                },
+            ) {
+                Text("About")
+            }
+        }
+    }
+
+    Div({ classes(MenuStyleSheet.main) }) {
+        content(routerState.activeChild.instance)
+    }
+}
 
 private object MenuStyleSheet : StyleSheet() {
     val container by style {
@@ -25,25 +63,8 @@ private object MenuStyleSheet : StyleSheet() {
             padding(8.px, 0.px)
         }
     }
-}
 
-@Composable
-fun Menu(
-    content: @Composable DOMScope<Element>.() -> Unit,
-) {
-    Style(MenuStyleSheet)
-
-    Div({ classes(MenuStyleSheet.container) }) {
-        Ul({ classes(MenuStyleSheet.list) }) {
-            Li {
-                Text("Home")
-            }
-            Li {
-                Text("Contents")
-            }
-            Li {
-                Text("About")
-            }
-        }
+    val main by style {
+        padding(16.px)
     }
 }
